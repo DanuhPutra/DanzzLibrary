@@ -123,7 +123,7 @@ export default {
   font-weight: bold;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 800px) {
   .container {
     display: block;
     height: auto;
