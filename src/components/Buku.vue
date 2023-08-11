@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper-buku">
     <div class="judul-buku">
+      <img :src="perpustakaan.gambar" :alt="perpustakaan.title" />
       <h1>{{ perpustakaan.title }}</h1>
     </div>
     <div class="deskripsi-buku">
@@ -43,10 +44,16 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 .wrapper-buku .judul-buku h1 {
   font-size: 24px;
   text-transform: capitalize;
+}
+.wrapper-buku .judul-buku img {
+  width: 80px;
+  height: 80px;
 }
 .wrapper-buku .deskripsi-buku {
   border-left: 2px solid;

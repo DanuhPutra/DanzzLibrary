@@ -9,6 +9,7 @@
   </div>
 </template>
 <script>
+import { busEvent } from "../main";
 export default {
   data() {
     return {
@@ -17,8 +18,8 @@ export default {
   },
   methods: {
     searchBuku() {
-      this.$emit("mencariBuku", this.filteredBuku);
-      console.log(this.filteredBuku);
+      busEvent.$emit("mencariBuku", this.filteredBuku);
+      console.log("dari search " + this.filteredBuku);
     }
   }
 };
