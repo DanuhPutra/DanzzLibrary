@@ -4,6 +4,25 @@
       <h1 class="judul">DanzzLibrary</h1>
       <div class="form-tambah-buku">
         <h1>Tambah Buku Baru!</h1>
+        <!-- <div class="uploadImg">
+          <h1 class="heading">Upload Gambar :</h1>
+          <div class="kotak-input ">
+            <input
+              type="file"
+              class="inputGambar"
+              placeholder="Link Gambar"
+              v-on:click="gambarFileChange"
+            />
+          </div>
+        </div> -->
+
+        <div class="kotak-input">
+          <input
+            type="text"
+            placeholder="Link Gambar"
+            v-model="dataInputBuku.gambar"
+          />
+        </div>
         <div class="kotak-input">
           <input
             type="text"
@@ -48,10 +67,13 @@
   </div>
 </template>
 <script>
+import { busEvent } from "../main";
 export default {
   data() {
     return {
       dataInputBuku: {
+        gambarApi: "",
+        gambar: "",
         title: "",
         deskripsi: "",
         pengarang: "",
@@ -62,13 +84,32 @@ export default {
   },
   methods: {
     tambahBuku() {
-      this.$emit("menambahkanBuku", this.dataInputBuku);
+      console.log("clicked");
+      busEvent.$emit("menambahkanBuku", this.dataInputBuku);
       this.dataInputBuku.title = "";
       this.dataInputBuku.deskripsi = "";
       this.dataInputBuku.pengarang = "";
       this.dataInputBuku.kategori = "";
       this.dataInputBuku.terbit = "";
     }
+    // changeTobase64(file) {
+    //   return new Promise((resolve, reject) => {
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onload = () => resolve(reader.result);
+    //     reader.onerror = reject;
+    //     console.log(reader);
+    //   });
+    // },
+    // gambarFileChange(e) {
+    //   console.log(e.target.files);
+    //   const files = e.target.files;
+    //   console.log(files);
+    //   if (!files.length) {
+    //     return (this.dataInputBuku.gambarApi = this.changeTobase64(files));
+    //   }
+    //   console.log(files);
+    // }
   }
 };
 </script>
@@ -116,5 +157,18 @@ textarea {
   padding: 10px;
   border-radius: 20px;
   display: block;
+}
+
+.inputGambar {
+  content: "Select some files";
+  display: inline-block;
+  background-color: white;
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
 }
 </style>
