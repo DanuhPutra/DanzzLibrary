@@ -28,7 +28,7 @@ export default {
 .searchBar {
   display: flex;
   width: 90%;
-  height: 50px;
+  height: 100px;
   margin: 0 auto;
   gap: 20px;
   align-items: center;
@@ -36,10 +36,11 @@ export default {
 }
 .searchBar .searchBtn {
   color: black;
-  font-size: 16px;
+  font-size: 25px;
   font-weight: bold;
   border-radius: 20px;
-  padding: 5px;
+  padding: 10px;
+
 }
 .searchBar input {
   width: 50%;
@@ -48,5 +49,6 @@ export default {
   border-radius: 20px;
   background-color: wheat;
   border: none;
+  font-size: 25px;
 }
 </style>

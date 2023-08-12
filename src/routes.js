@@ -1,14 +1,20 @@
-import DetailBuku from "./components/pages/DetailBuku.vue";
 import HomePage from "./components/pages/HomePage.vue";
+import DetailBuku from "./components/pages/DetailBuku.vue";
+import AddBukuPage from "./components/pages/AddBukuPage.vue"
 export const routes = [
   {
     path: "/",
     name: "Home",
-    components: HomePage
+    component: HomePage
   },
   {
-    path: "/DetailBuku",
+    path: "/DetailBuku/:id",
     name: "detailBuku",
-    components: DetailBuku
-  }
+    component: DetailBuku
+  },
+  {
+    path: "/MenambahkanBuku",
+    name: "addBuku",
+    component: AddBukuPage
+  },
 ];

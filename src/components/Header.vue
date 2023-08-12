@@ -1,20 +1,11 @@
 <template>
-  <div class="header">
+<div>
+  <navbar></navbar>
+    <div class="header">
+
     <div class="judul-header">
-      <h1 class="judul">DanzzLibrary</h1>
       <div class="form-tambah-buku">
         <h1>Tambah Buku Baru!</h1>
-        <!-- <div class="uploadImg">
-          <h1 class="heading">Upload Gambar :</h1>
-          <div class="kotak-input ">
-            <input
-              type="file"
-              class="inputGambar"
-              placeholder="Link Gambar"
-              v-on:click="gambarFileChange"
-            />
-          </div>
-        </div> -->
 
         <div class="kotak-input">
           <input
@@ -61,18 +52,20 @@
             v-model="dataInputBuku.deskripsi"
           ></textarea>
         </div>
-        <button @click="tambahBuku" class="inputBtn">TAMBAHKAN</button>
+        <button @click="postBuku" class="inputBtn">TAMBAHKAN</button>
       </div>
     </div>
   </div>
+</div>
+
 </template>
 <script>
 import { busEvent } from "../main";
+import Navbar from "./Navbar.vue"
 export default {
   data() {
     return {
       dataInputBuku: {
-        gambarApi: "",
         gambar: "",
         title: "",
         deskripsi: "",
@@ -82,42 +75,52 @@ export default {
       }
     };
   },
+  components:{
+    'navbar': Navbar
+  },
   methods: {
+    postBuku(){
+      this.$http
+        .post(
+          "https://perpustakaannew-default-rtdb.firebaseio.com/libraryDanz.json",
+          this.dataInputBuku
+        )
+        .then(
+          response => {
+            this.tambahBuku();
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    },
     tambahBuku() {
       console.log("clicked");
       busEvent.$emit("menambahkanBuku", this.dataInputBuku);
+      this.$router.back();
       this.dataInputBuku.title = "";
       this.dataInputBuku.deskripsi = "";
       this.dataInputBuku.pengarang = "";
       this.dataInputBuku.kategori = "";
       this.dataInputBuku.terbit = "";
     }
-    // changeTobase64(file) {
-    //   return new Promise((resolve, reject) => {
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     reader.onload = () => resolve(reader.result);
-    //     reader.onerror = reject;
-    //     console.log(reader);
-    //   });
-    // },
-    // gambarFileChange(e) {
-    //   console.log(e.target.files);
-    //   const files = e.target.files;
-    //   console.log(files);
-    //   if (!files.length) {
-    //     return (this.dataInputBuku.gambarApi = this.changeTobase64(files));
-    //   }
-    //   console.log(files);
-    // }
   }
 };
 </script>
 <style>
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-color: #00c4ff;
+}
 .header {
   background-color: #00c4ff;
-  flex-basis: 20%;
   padding-bottom: 20px;
+  width: 50%;
+  margin: 0 auto;
+
 }
 .header .judul-header .judul {
   font-size: 29px;
