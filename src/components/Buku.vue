@@ -11,7 +11,12 @@
       <h2>{{ perpustakaan.pengarang }}</h2>
       <h3>{{ perpustakaan.kategori }}</h3>
       <h4>{{ perpustakaan.terbit }}</h4>
-      <button class="btnBuku" @click="HapusBuku">HAPUS BUKU</button>
+
+      <div class="button">
+        <button class="btnBuku" @click="HapusBuku" v-if="perpustakaan.id">HAPUS BUKU</button>
+        <router-link class="btnBuku" tag="button" :to="{ name: 'detailBuku', params: { id: perpustakaan.id} }" v-if="perpustakaan.id">DETAIL BUKU</router-link>
+      </div>
+
     </div>
   </div>
 </template>
@@ -24,10 +29,10 @@ export default {
       busEvent.$emit("menghapusBuku", this.index);
       console.log("menghapus " + this.index);
     }
-  }
+  },
 };
 </script>
-<style>
+<style scoped>
 .wrapper-buku {
   background-color: rgb(122, 169, 153);
   display: flex;
@@ -35,8 +40,8 @@ export default {
   border-style: solid;
   height: 230px;
   width: 350px;
-  margin: 0 auto;
   border-radius: 10px;
+  margin: 0px 20px;
 }
 .wrapper-buku .judul-buku {
   color: white;
@@ -83,17 +88,22 @@ export default {
   bottom: 0;
   text-align: center;
 }
+.wrapper-buku .deskripsi-buku .button{
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+}
 .btnBuku {
   background-color: aliceblue;
   color: black;
-  padding: 3px;
-  font-size: 7px;
+  padding: 5px;
+  font-size: 10px;
   width: auto;
-  bottom: 0;
-  position: absolute;
-  margin: 3px;
-  right: 0;
   border-radius: 10px;
+  margin: 0 auto;
+
 }
 .btnBuku:hover {
   background-color: black;
