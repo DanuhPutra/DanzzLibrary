@@ -1,7 +1,7 @@
 <template>
-  <div class="detailContainer">
-    <detail-unit :perpustakaan="detailBukuId"></detail-unit>
-  </div>
+
+    <detail-unit :pindah="true" :perpustakaan="detailBukuId" ></detail-unit>
+
   
 
 </template>
@@ -47,3 +47,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.wrapper-buku {
+  background-color: rgb(122, 169, 153);
+  display: flex;
+  border-width: 3px;
+  border-style: solid;
+  height: 230px;
+  width: 350px;
+  border-radius: 10px;
+  margin: 0px 20px;
+}
+</style>

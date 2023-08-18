@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-buku">
+    <div class="wrapper-buku" v-bind:class="{ pindahHalaman: pindah}">
     <div class="judul-buku">
       <img :src="perpustakaan.gambar" :alt="perpustakaan.title" />
       <h1>{{ perpustakaan.title }}</h1>
@@ -14,16 +14,17 @@
 
       <div class="button">
         <button class="btnBuku" @click="HapusBuku" v-if="perpustakaan.id">HAPUS BUKU</button>
-        <router-link class="btnBuku" tag="button" :to="{ name: 'detailBuku', params: { id: perpustakaan.id} }" v-if="perpustakaan.id">DETAIL BUKU</router-link>
+        <router-link class="btnBuku" tag="button" :to="{ name: 'detailBuku', params: { id: perpustakaan.id} }" v-if="perpustakaan.id" >DETAIL BUKU</router-link>
       </div>
 
     </div>
-  </div>
+    </div>
+
 </template>
 <script>
 import { busEvent } from "../main";
 export default {
-  props: ["perpustakaan", "index"],
+  props: ["perpustakaan", "index", "pindah"],
   methods: {
     HapusBuku() {
       busEvent.$emit("menghapusBuku", this.index);
@@ -109,5 +110,8 @@ export default {
   background-color: black;
   color: orange;
   cursor: pointer;
+}
+.pindahHalaman{
+  background-color: black;
 }
 </style>
