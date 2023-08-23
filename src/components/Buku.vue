@@ -1,10 +1,10 @@
 <template>
-    <div class="wrapper-buku" v-bind:class="{ pindahHalaman: pindah}">
-    <div class="judul-buku">
+  <div class="wrapper-buku" v-bind:class="{ pindahHalaman: pindah }">
+    <div class="judul-buku" v-bind:class="{ imageDetail: pindah }">
       <img :src="perpustakaan.gambar" :alt="perpustakaan.title" />
       <h1>{{ perpustakaan.title }}</h1>
     </div>
-    <div class="deskripsi-buku">
+    <div class="deskripsi-buku" v-bind:class="{ deskripsiDetail: pindah }">
       <p>
         {{ perpustakaan.deskripsi }}
       </p>
@@ -13,27 +13,40 @@
       <h4>{{ perpustakaan.terbit }}</h4>
 
       <div class="button">
-        <button class="btnBuku" @click="HapusBuku" v-if="perpustakaan.id">HAPUS BUKU</button>
-        <router-link class="btnBuku" tag="button" :to="{ name: 'detailBuku', params: { id: perpustakaan.id} }" v-if="perpustakaan.id" >DETAIL BUKU</router-link>
+        <button class="btnBuku" @click="HapusBuku" v-if="perpustakaan.id">
+          HAPUS BUKU
+        </button>
+        <router-link
+          class="btnBuku"
+          tag="button"
+          :to="{ name: 'detailBuku', params: { id: perpustakaan.id } }"
+          v-if="perpustakaan.id"
+          >DETAIL BUKU</router-link
+        >
+        <router-link
+          class="btnBuku"
+          tag="button"
+          :to="{ name: 'Home' }"
+          v-if="pindah"
+          >Back to Home
+        </router-link>
       </div>
-
     </div>
-    </div>
-
+  </div>
 </template>
 <script>
 import { busEvent } from "../main";
 export default {
-  props: ["perpustakaan", "index", "pindah"],
+  props: ["pindah", "perpustakaan", "index"],
   methods: {
     HapusBuku() {
-      busEvent.$emit("menghapusBuku", this.index);
-      console.log("menghapus " + this.index);
+      busEvent.$emit("menghapusBuku", this.perpustakaan.id);
+      console.log("menghapus " + this.perpustakaan.id);
     }
-  },
+  }
 };
 </script>
-<style scoped>
+<style>
 .wrapper-buku {
   background-color: rgb(122, 169, 153);
   display: flex;
@@ -89,7 +102,7 @@ export default {
   bottom: 0;
   text-align: center;
 }
-.wrapper-buku .deskripsi-buku .button{
+.wrapper-buku .deskripsi-buku .button {
   width: 100%;
   height: 30px;
   position: absolute;
@@ -104,14 +117,42 @@ export default {
   width: auto;
   border-radius: 10px;
   margin: 0 auto;
-
 }
 .btnBuku:hover {
   background-color: black;
   color: orange;
   cursor: pointer;
 }
-.pindahHalaman{
-  background-color: black;
+.pindahHalaman {
+  background-color: red;
+  height: 80vh;
+  width: 80vw;
+  margin: 0 auto;
+  margin-top: 4%;
+}
+.pindahHalaman .imageDetail img {
+  width: 80%;
+  height: 80%;
+  border-radius: 20px;
+}
+.pindahHalaman .imageDetail h1 {
+  font-size: 0px;
+}
+.pindahHalaman .deskripsiDetail p {
+  font-size: 24px;
+}
+.pindahHalaman .deskripsiDetail h2 {
+  font-size: 22px;
+  color: yellow;
+}
+.pindahHalaman .deskripsiDetail h3 {
+  font-size: 22px;
+  font-weight: bold;
+  color: green;
+}
+.pindahHalaman .deskripsiDetail h4 {
+  font-size: 22px;
+  font-weight: bold;
+  color: red;
 }
 </style>

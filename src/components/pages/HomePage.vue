@@ -1,9 +1,8 @@
 <template>
   <div class="container">
-  <navbar-buku></navbar-buku>
-  <item-search></item-search>
+    <navbar-buku></navbar-buku>
+    <item-search></item-search>
     <div class="kotak-buku">
-      
       <div class="pembungkus-buku" v-if="memfilterBuku.length > 0">
         <item-buku
           v-for="(data, index) in memfilterBuku"
@@ -18,12 +17,11 @@
           Buku di perpustakaan kosong
         </p>
       </div>
-      
     </div>
   </div>
 </template>
 <script>
-import navbar from "../Navbar"
+import navbar from "../Navbar";
 import Buku from "../Buku";
 import Search from "../Search";
 import { busEvent } from "../../main.js";
@@ -82,27 +80,28 @@ export default {
         .then(inputBuku => {
           console.log(inputBuku);
           for (let key in inputBuku) {
-            // if (!this.dataBuku.find(data => data.id == inputBuku[key].id)) {
-            //   this.dataBuku.push({ ...inputBuku[key], id: key });
-            //   this.memfilterBuku.push({ ...inputBuku[key], id: key });
-            // }
-            // console.log(this.dataBuku);
             const urutanBuku = {
               ...inputBuku[key],
-              id : key
+              id: key
             };
             this.dataBuku.push(urutanBuku);
             this.memfilterBuku.push(urutanBuku);
-            console.log(this.memfilterBuku)
+            console.log(this.memfilterBuku);
           }
         });
     }
   },
   mounted() {
-    busEvent.$on("menghapusBuku", index => {
-      this.dataBuku.splice(index, 1);
-      this.memfilterBuku.splice(index, 1);
+    busEvent.$on("menghapusBuku", id => {
+      const filterHapus = this.dataBuku.findIndex(buku => id === buku.id);
+
+      this.dataBuku.splice(filterHapus, 1);
+      this.memfilterBuku.splice(filterHapus, 1);
       console.log(this.memfilterBuku.length);
+
+      this.$http.delete(
+        "https://perpustakaannew-default-rtdb.firebaseio.com/libraryDanz/id.json"
+      );
     });
     busEvent.$on("mencariBuku", filteredBuku => {
       this.memfilterBuku = this.dataBuku.filter(data => {
@@ -138,14 +137,13 @@ export default {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-
 }
 .container {
   background-color: #30a2ff;
   height: 100vh;
   width: 100vw;
 }
-.navbar{
+.navbar {
   background-color: black;
   color: white;
   text-align: center;

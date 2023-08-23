@@ -1,67 +1,65 @@
 <template>
-<div>
-  <navbar></navbar>
+  <div>
+    <navbar></navbar>
     <div class="header">
+      <div class="judul-header">
+        <div class="form-tambah-buku">
+          <h1>Tambah Buku Baru!</h1>
 
-    <div class="judul-header">
-      <div class="form-tambah-buku">
-        <h1>Tambah Buku Baru!</h1>
-
-        <div class="kotak-input">
-          <input
-            type="text"
-            placeholder="Link Gambar"
-            v-model="dataInputBuku.gambar"
-          />
+          <div class="kotak-input">
+            <input
+              type="text"
+              placeholder="Link Gambar"
+              v-model="dataInputBuku.gambar"
+            />
+          </div>
+          <div class="kotak-input">
+            <input
+              type="text"
+              placeholder="Judul Buku"
+              v-model="dataInputBuku.title"
+            />
+          </div>
+          <div class="kotak-input">
+            <input
+              type="text"
+              placeholder="Pengarang"
+              v-model="dataInputBuku.pengarang"
+            />
+          </div>
+          <div class="kotak-input">
+            <input
+              type="text"
+              placeholder="Kategori Buku"
+              v-model="dataInputBuku.kategori"
+            />
+          </div>
+          <div class="kotak-input">
+            <input
+              type="text"
+              placeholder="Tahun Terbit"
+              v-model="dataInputBuku.terbit"
+            />
+          </div>
+          <div class="kotak-input">
+            <textarea
+              name=""
+              id=""
+              cols="5"
+              rows="5"
+              placeholder="Deskripsi Buku"
+              v-model="dataInputBuku.deskripsi"
+            ></textarea>
+          </div>
+          <button @click="postBuku" class="inputBtn">TAMBAHKAN</button>
         </div>
-        <div class="kotak-input">
-          <input
-            type="text"
-            placeholder="Judul Buku"
-            v-model="dataInputBuku.title"
-          />
-        </div>
-        <div class="kotak-input">
-          <input
-            type="text"
-            placeholder="Pengarang"
-            v-model="dataInputBuku.pengarang"
-          />
-        </div>
-        <div class="kotak-input">
-          <input
-            type="text"
-            placeholder="Kategori Buku"
-            v-model="dataInputBuku.kategori"
-          />
-        </div>
-        <div class="kotak-input">
-          <input
-            type="text"
-            placeholder="Tahun Terbit"
-            v-model="dataInputBuku.terbit"
-          />
-        </div>
-        <div class="kotak-input">
-          <textarea
-            name=""
-            id=""
-            cols="5"
-            rows="5"
-            placeholder="Deskripsi Buku"
-            v-model="dataInputBuku.deskripsi"
-          ></textarea>
-        </div>
-        <button @click="postBuku" class="inputBtn">TAMBAHKAN</button>
       </div>
     </div>
   </div>
-</div>
-
 </template>
 <script>
 import { busEvent } from "../main";
-import Navbar from "./Navbar.vue"
+import Navbar from "./Navbar";
 export default {
   data() {
     return {
@@ -75,11 +73,11 @@ export default {
       }
     };
   },
-  components:{
-    'navbar': Navbar
+  components: {
+    navbar: Navbar
   },
   methods: {
-    postBuku(){
+    postBuku() {
       this.$http
         .post(
           "https://perpustakaannew-default-rtdb.firebaseio.com/libraryDanz.json",
@@ -108,11 +106,11 @@ export default {
 };
 </script>
 <style>
-*{
+* {
   margin: 0;
   padding: 0;
 }
-body{
+body {
   background-color: #00c4ff;
 }
 .header {
@@ -120,7 +118,6 @@ body{
   padding-bottom: 20px;
   width: 50%;
   margin: 0 auto;
-
 }
 .header .judul-header .judul {
   font-size: 29px;

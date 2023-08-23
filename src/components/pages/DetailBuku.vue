@@ -1,22 +1,20 @@
 <template>
-
-    <detail-unit :pindah="true" :perpustakaan="detailBukuId" ></detail-unit>
-
-  
-
+  <div>
+    <detail-unit :perpustakaan="detailBukuId" :pindah="true"></detail-unit>
+  </div>
 </template>
 <script>
-import Buku from "../Buku.vue"
+import Buku from "../Buku.vue";
 export default {
-  data: function(){
-    return{
-      detailBukuId : {},
-      detailBuku : this.$route.params.id
-    }
+  data: function() {
+    return {
+      detailBukuId: {},
+      detailBuku: this.$route.params.id
+    };
   },
-  props:["perpustakaan"],
-  methods:{
-    detailBukuBaru(){
+  props: ["perpustakaan"],
+  methods: {
+    detailBukuBaru() {
       this.$http
         .get(
           "https://perpustakaannew-default-rtdb.firebaseio.com/libraryDanz.json"
@@ -28,35 +26,22 @@ export default {
         .then(inputBuku => {
           console.log(inputBuku);
           for (let key in inputBuku) {
-            if ( key === this.detailBuku){
+            if (key === this.detailBuku) {
               this.detailBukuId = inputBuku[key];
-              console.log(this.detailBukuId)
+              console.log(this.detailBukuId);
             }
           }
         });
     }
   },
-  mounted(){
+  mounted() {
     this.detailBukuBaru();
   },
-  created(){
+  created() {
     this.detailBukuBaru();
   },
-  components:{
-    "detail-unit" : Buku
+  components: {
+    "detail-unit": Buku
   }
-}
+};
 </script>
-
-<style scoped>
-.wrapper-buku {
-  background-color: rgb(122, 169, 153);
-  display: flex;
-  border-width: 3px;
-  border-style: solid;
-  height: 230px;
-  width: 350px;
-  border-radius: 10px;
-  margin: 0px 20px;
-}
-</style>
