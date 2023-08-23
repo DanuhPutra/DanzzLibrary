@@ -100,7 +100,7 @@ export default {
       console.log(this.memfilterBuku.length);
 
       this.$http.delete(
-        "https://perpustakaannew-default-rtdb.firebaseio.com/libraryDanz/id.json"
+        `https://perpustakaannew-default-rtdb.firebaseio.com/libraryDanz/${id}.json`
       );
     });
     busEvent.$on("mencariBuku", filteredBuku => {
